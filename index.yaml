@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  mono-chart:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-01-31T17:47:11.672073+01:00"
+    description: A Helm chart for Deploying Multiple Services
+    digest: f382b32611632db3368544c763b6eea0fb238677930b995344d24e2b04d9643c
+    icon: https://yt3.googleusercontent.com/ytc/AIdro_nXZQXqUG0ZDTLj32GfhHcaj9qGVoGbEtQAatfL2OnMJg=s900-c-k-c0x00ffffff-no-rj
+    name: mono-chart
+    type: application
+    urls:
+    - mono-chart-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-01-31T17:47:11.670551+01:00"
