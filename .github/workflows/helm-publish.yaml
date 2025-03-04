@@ -5,7 +5,7 @@ on:
     branches:
       - main    # Or your default branch
     paths:
-      - 'charts/**'    # Only trigger if charts are updated
+      - 'templates/**'    # Only trigger if charts are updated
 
 permissions:
   contents: write
@@ -25,13 +25,11 @@ jobs:
     - name: Package Helm Chart
       run: |
         mkdir -p packaged
-        for chart in charts/*; do
-          helm package $chart --destination packaged
-        done
+        helm package oraperf-chart --destination packaged
 
     - name: Update Helm Index
       run: |
-        helm repo index packaged --url https://<your_github_username>.github.io/<repo_name>
+        helm repo index packaged --url https://akolk.github.io/oraperf-chart
 
     - name: Push Chart to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
