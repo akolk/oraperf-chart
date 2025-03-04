@@ -1,0 +1,41 @@
+name: Publish Helm Charts
+
+on:
+  push:
+    branches:
+      - main    # Or your default branch
+    paths:
+      - 'charts/**'    # Only trigger if charts are updated
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Helm
+      run: |
+        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+    - name: Package Helm Chart
+      run: |
+        mkdir -p packaged
+        for chart in charts/*; do
+          helm package $chart --destination packaged
+        done
+
+    - name: Update Helm Index
+      run: |
+        helm repo index packaged --url https://<your_github_username>.github.io/<repo_name>
+
+    - name: Push Chart to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./packaged
+        publish_branch: gh-pages
