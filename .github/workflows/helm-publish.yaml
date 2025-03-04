@@ -28,7 +28,7 @@ jobs:
     - name: Package Helm Chart
       run: |
         mkdir -p packaged
-        helm package oraperf-chart --destination packaged
+        helm package . --destination packaged
 
     - name: Update Helm Index
       run: |
