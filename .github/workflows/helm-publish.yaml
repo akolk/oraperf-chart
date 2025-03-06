@@ -5,10 +5,7 @@ on:
     branches:
       - main    # Or your default branch
     paths:
-      - 'templates/**'    # Only trigger if charts are updated
-      - Chart.yaml
-      - values.yaml
-      - index.yaml
+      - 'charts/**'    # Only trigger if charts are updated
 
 permissions:
   contents: write
@@ -28,7 +25,9 @@ jobs:
     - name: Package Helm Chart
       run: |
         mkdir -p packaged
-        helm package . --destination packaged
+        for chart in charts/*; do
+          helm package $chart --destination packaged
+        done
 
     - name: Update Helm Index
       run: |
