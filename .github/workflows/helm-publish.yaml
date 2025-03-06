@@ -26,6 +26,7 @@ jobs:
       run: |
         mkdir -p packaged
         for chart in charts/*; do
+          cd $HOME/$chart
           helm package $chart --destination packaged
         done
 
